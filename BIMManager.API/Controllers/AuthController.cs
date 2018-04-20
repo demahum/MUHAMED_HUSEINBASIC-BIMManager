@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BIMManager.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +34,7 @@ namespace BIMManager.API.Controllers
         public async Task<IActionResult> Login([FromBody] LoginViewModel loginRequest)
         {
             // check validity of request
-            if (loginRequest.Email == "" || loginRequest.Email == null)
+            if (string.IsNullOrEmpty(loginRequest.Email))
             {
                 return BadRequest(new
                 {
@@ -52,7 +50,7 @@ namespace BIMManager.API.Controllers
                     message = "Email is not valid."
                 });
             }
-            if (loginRequest.Password == "" || loginRequest.Password == null) {
+            if (string.IsNullOrEmpty(loginRequest.Password)) {
                 return BadRequest(new {
                     status = false,
                     message = "Password cannot be empty."
@@ -80,7 +78,7 @@ namespace BIMManager.API.Controllers
         [HttpPost("Register", Name = "Register")]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel registerViewModel)
         {
-            if (registerViewModel.Email == "" || registerViewModel.Email == null)
+            if (string.IsNullOrEmpty(registerViewModel.Email))
             {
                 return BadRequest(new
                 {

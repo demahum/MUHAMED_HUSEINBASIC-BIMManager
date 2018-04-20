@@ -16,6 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using BIMManager.API.Services;
 using System.Net;
+using BIMManager.Data.Abstract;
+using BIMManager.Data.Repositories;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace BIMManager
@@ -49,6 +51,8 @@ namespace BIMManager
 
             // Register services
             services.AddScoped<JwtService>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IBIMModelRepository, BIMModelRepository>();
 
             // CORS
             services.AddCors();
